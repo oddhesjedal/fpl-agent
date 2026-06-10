@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { StatCard } from "@/components/StatCard";
 import { FixtureRun } from "@/components/FixtureGrid";
+import { TeamBadge } from "@/components/Badge";
+import { HBarChart } from "@/components/Charts";
 import type { BootstrapResponse, OptimizeResponse } from "@/lib/api-types";
 
 export default function Dashboard() {
@@ -40,10 +42,9 @@ export default function Dashboard() {
     boot.events.find((e) => e.is_next) ??
     boot.events.find((e) => e.is_current) ??
     boot.events[0];
-  const topValue = [...boot.players]
-    .filter((p) => p.availability > 0)
-    .sort((a, b) => b.valueScore - a.valueScore)
-    .slice(0, 10);
+  const available = boot.players.filter((p) => p.availability > 0);
+  const topValue = [...available].sort((a, b) => b.valueScore - a.valueScore).slice(0, 10);
+  const topProjected = [...available].sort((a, b) => b.projected - a.projected).slice(0, 8);
   const captain = opt?.xi.captain;
 
   return (
@@ -87,7 +88,12 @@ export default function Dashboard() {
           <tbody>
             {topValue.map((p) => (
               <tr key={p.id} className="border-t border-slate-100">
-                <td className="px-3 py-2 font-medium">{p.name}</td>
+                <td className="px-3 py-2 font-medium">
+                  <div className="flex items-center gap-2">
+                    <TeamBadge code={p.teamCode} size={22} />
+                    {p.name}
+                  </div>
+                </td>
                 <td className="px-3 py-2 text-slate-500">{p.positionShort}</td>
                 <td className="px-3 py-2 text-right">{p.cost.toFixed(1)}</td>
                 <td className="px-3 py-2 text-right font-semibold">{p.projected.toFixed(1)}</td>
@@ -99,6 +105,18 @@ export default function Dashboard() {
             ))}
           </tbody>
         </table>
+      </div>
+
+      <h2 className="text-lg font-semibold">Highest projected points</h2>
+      <div className="card">
+        <HBarChart
+          data={topProjected.map((p) => ({
+            label: p.name,
+            value: p.projected,
+            badgeCode: p.teamCode,
+            display: p.projected.toFixed(1),
+          }))}
+        />
       </div>
 
       <div className="rounded-lg bg-amber-50 p-3 text-xs text-amber-800">

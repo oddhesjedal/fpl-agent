@@ -3,6 +3,7 @@
 
 export interface FplTeam {
   id: number;
+  code: number; // used to build the club badge image URL
   name: string;
   short_name: string;
   strength: number;
@@ -35,6 +36,7 @@ export interface FplElement {
   web_name: string;
   first_name: string;
   second_name: string;
+  photo: string; // e.g. "118748.jpg" -> used to build the player photo URL
   team: number; // FplTeam.id
   element_type: number; // FplElementType.id
   now_cost: number; // price in tenths of a million (55 = £5.5m)

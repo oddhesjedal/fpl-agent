@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { FixtureRun } from "@/components/FixtureGrid";
+import { TeamBadge } from "@/components/Badge";
 import type { BootstrapResponse } from "@/lib/api-types";
 
 export default function FixturesPage() {
@@ -55,7 +56,12 @@ export default function FixturesPage() {
           <tbody>
             {ranked.map((t) => (
               <tr key={t.id} className="border-t border-slate-100">
-                <td className="px-3 py-2 font-medium">{t.name}</td>
+                <td className="px-3 py-2 font-medium">
+                  <div className="flex items-center gap-2">
+                    <TeamBadge code={t.code} size={22} />
+                    {t.name}
+                  </div>
+                </td>
                 <td className="px-3 py-2 text-right font-semibold">{t.avg.toFixed(2)}</td>
                 <td className="px-3 py-2">
                   <FixtureRun fixtures={t.fixtures} />

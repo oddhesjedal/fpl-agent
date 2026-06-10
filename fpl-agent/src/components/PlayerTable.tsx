@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import type { ScoredPlayer } from "@/lib/engine/scoring";
 import { FixtureRun } from "./FixtureGrid";
+import { TeamBadge } from "./Badge";
 
 type SortKey = "projected" | "valueScore" | "form" | "totalPoints" | "cost" | "selectedByPercent";
 
@@ -95,13 +96,18 @@ export function PlayerTable({
             {rows.map((p) => (
               <tr key={p.id} className="border-t border-slate-100 hover:bg-slate-50">
                 <td className="px-3 py-2">
-                  <div className="font-medium">{p.name}</div>
-                  <div className="text-xs text-slate-400">{p.teamShort}</div>
-                  {p.availability < 1 ? (
-                    <div className="text-[11px] text-orange-600">
-                      {Math.round(p.availability * 100)}% to play
+                  <div className="flex items-center gap-2">
+                    <TeamBadge code={p.teamCode} size={22} />
+                    <div>
+                      <div className="font-medium">{p.name}</div>
+                      <div className="text-xs text-slate-400">{p.teamShort}</div>
+                      {p.availability < 1 ? (
+                        <div className="text-[11px] text-orange-600">
+                          {Math.round(p.availability * 100)}% to play
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
+                  </div>
                 </td>
                 <td className="px-3 py-2 text-slate-500">{p.positionShort}</td>
                 <td className="px-3 py-2 text-right font-semibold">{p.projected.toFixed(1)}</td>

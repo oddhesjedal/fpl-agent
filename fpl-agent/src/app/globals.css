@@ -7,19 +7,47 @@
 }
 
 body {
-  @apply bg-slate-50 text-ink antialiased;
+  @apply bg-[#f6f2f8] text-ink antialiased;
 }
 
 .card {
-  @apply rounded-xl border border-slate-200 bg-white p-4 shadow-sm;
+  @apply rounded-2xl border border-fpl-purple/10 bg-white p-4 shadow-card transition-shadow;
+}
+.card:hover {
+  @apply shadow-cardHover;
 }
 
 .pill {
-  @apply inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium;
+  @apply inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold;
 }
 
-.fdr-1 { @apply bg-emerald-200 text-emerald-900; }
-.fdr-2 { @apply bg-emerald-100 text-emerald-800; }
-.fdr-3 { @apply bg-slate-100 text-slate-700; }
-.fdr-4 { @apply bg-orange-200 text-orange-900; }
-.fdr-5 { @apply bg-red-300 text-red-950; }
+/* Accent button */
+.btn-green {
+  @apply rounded-lg bg-fpl-green px-4 py-2 text-sm font-bold text-fpl-purple transition hover:bg-fpl-greenDark disabled:opacity-50;
+}
+
+/* Section heading */
+.section-title {
+  @apply text-lg font-bold text-fpl-purple;
+}
+
+/* Fixture difficulty rating chips */
+.fdr-1 { @apply bg-emerald-300 text-emerald-950; }
+.fdr-2 { @apply bg-emerald-200 text-emerald-900; }
+.fdr-3 { @apply bg-slate-200 text-slate-700; }
+.fdr-4 { @apply bg-orange-300 text-orange-950; }
+.fdr-5 { @apply bg-red-400 text-red-950; }
+
+/* Table niceties */
+.tbl {
+  @apply w-full text-left text-sm;
+}
+.tbl thead {
+  @apply bg-fpl-purple/[0.04] text-xs uppercase tracking-wide text-fpl-purpleSoft;
+}
+.tbl tbody tr {
+  @apply border-t border-slate-100;
+}
+.tbl tbody tr:hover {
+  @apply bg-fpl-green/[0.06];
+}

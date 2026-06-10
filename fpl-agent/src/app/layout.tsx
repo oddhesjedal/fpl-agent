@@ -22,17 +22,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <div className="min-h-screen">
-          <header className="bg-pitch text-white">
-            <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-              <Link href="/" className="text-lg font-bold tracking-tight">
-                ⚽ FPL Agent
-              </Link>
-              <nav className="flex flex-wrap gap-1 text-sm">
+          <header className="bg-fpl-header text-white shadow-lg">
+            <div className="mx-auto max-w-6xl px-4 py-4">
+              <div className="flex items-center justify-between">
+                <Link href="/" className="flex items-center gap-2 text-xl font-extrabold tracking-tight">
+                  <span className="grid h-8 w-8 place-items-center rounded-lg bg-fpl-green text-fpl-purple">
+                    ⚽
+                  </span>
+                  FPL <span className="text-fpl-green">Agent</span>
+                </Link>
+                <span className="hidden text-xs font-medium text-white/60 sm:block">
+                  your edge for 2026/27
+                </span>
+              </div>
+              <nav className="mt-3 flex flex-wrap gap-1 text-sm">
                 {NAV.map((n) => (
                   <Link
                     key={n.href}
                     href={n.href}
-                    className="rounded-md px-3 py-1.5 hover:bg-pitchDark"
+                    className="rounded-lg px-3 py-1.5 font-medium text-white/85 transition hover:bg-white/10 hover:text-white"
                   >
                     {n.label}
                   </Link>
@@ -41,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </header>
           <main className="mx-auto max-w-6xl px-4 py-6">{children}</main>
-          <footer className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-slate-400">
+          <footer className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-fpl-purpleSoft/70">
             Advisory only · data from the public FPL API · you make the final calls.
           </footer>
         </div>

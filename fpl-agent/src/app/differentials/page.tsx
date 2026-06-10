@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { FixtureRun } from "@/components/FixtureGrid";
+import { TeamBadge } from "@/components/Badge";
 import type { BootstrapResponse, ScoredPlayer } from "@/lib/api-types";
 
 const THRESHOLDS = [3, 5, 10, 15];
@@ -115,8 +116,13 @@ export default function DifferentialsPage() {
               rows.map((p) => (
                 <tr key={p.id} className="border-t border-slate-100 hover:bg-slate-50">
                   <td className="px-3 py-2">
-                    <div className="font-medium">{p.name}</div>
-                    <div className="text-xs text-slate-400">{p.teamShort}</div>
+                    <div className="flex items-center gap-2">
+                      <TeamBadge code={p.teamCode} size={22} />
+                      <div>
+                        <div className="font-medium">{p.name}</div>
+                        <div className="text-xs text-slate-400">{p.teamShort}</div>
+                      </div>
+                    </div>
                   </td>
                   <td className="px-3 py-2 text-slate-500">{p.positionShort}</td>
                   <td className="px-3 py-2 text-right">{p.cost.toFixed(1)}</td>

@@ -6,7 +6,9 @@ export interface ScoredPlayer {
   id: number;
   name: string;
   teamId: number;
+  teamCode: number; // for the club badge image
   teamShort: string;
+  photoId: string; // for the player photo image (without extension)
   position: number; // element_type
   positionShort: string; // GKP/DEF/MID/FWD
   costTenths: number; // price in tenths
@@ -62,6 +64,7 @@ export function scorePlayers(
 ): ScoredPlayer[] {
   const teamFixtures = buildTeamFixtures(bootstrap, fixtures);
   const shortByTeam = new Map(bootstrap.teams.map((t) => [t.id, t.short_name]));
+  const codeByTeam = new Map(bootstrap.teams.map((t) => [t.id, t.code]));
   const typeShort = new Map(
     bootstrap.element_types.map((t) => [t.id, t.singular_name_short])
   );
@@ -98,7 +101,9 @@ export function scorePlayers(
       id: p.id,
       name: p.web_name,
       teamId: p.team,
+      teamCode: codeByTeam.get(p.team) ?? 0,
       teamShort: shortByTeam.get(p.team) ?? "?",
+      photoId: (p.photo ?? "").replace(/\.(jpg|png)$/i, ""),
       position: p.element_type,
       positionShort: typeShort.get(p.element_type) ?? "?",
       costTenths: p.now_cost,

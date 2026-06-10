@@ -16,7 +16,13 @@ export interface BootstrapResponse {
     is_next: boolean;
     finished: boolean;
   }[];
-  teams: { id: number; name: string; short_name: string; fixtures: TeamFixture[] }[];
+  teams: {
+    id: number;
+    code: number;
+    name: string;
+    short_name: string;
+    fixtures: TeamFixture[];
+  }[];
   players: ScoredPlayer[];
 }
 

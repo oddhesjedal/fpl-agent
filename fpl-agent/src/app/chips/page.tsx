@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { HBarChart } from "@/components/Charts";
 import type { ChipPlan } from "@/lib/api-types";
 
 const CHIP_BLURB: Record<string, string> = {
@@ -66,6 +67,24 @@ export default function ChipsPage() {
             <p className="mt-1 text-sm text-slate-600">{r.reason}</p>
           </div>
         ))}
+      </div>
+
+      <div>
+        <h2 className="mb-2 font-semibold">Fixture difficulty by gameweek</h2>
+        <div className="card">
+          <HBarChart
+            labelWidth="w-16"
+            data={plan.gameweeks.map((g) => ({
+              label: `GW ${g.event}`,
+              value: g.avgDifficulty,
+              barClass: `fdr-${Math.min(5, Math.max(1, Math.round(g.avgDifficulty)))}`,
+              display: g.avgDifficulty.toFixed(2),
+            }))}
+          />
+          <p className="mt-2 text-xs text-slate-400">
+            Lower is easier. Shorter green bars are the best weeks to attack.
+          </p>
+        </div>
       </div>
 
       <div>

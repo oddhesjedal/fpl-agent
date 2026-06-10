@@ -23,6 +23,7 @@ export async function GET() {
       })),
       teams: bootstrap.teams.map((t) => ({
         id: t.id,
+        code: t.code,
         name: t.name,
         short_name: t.short_name,
         fixtures: teamFixtures.get(t.id) ?? [],
