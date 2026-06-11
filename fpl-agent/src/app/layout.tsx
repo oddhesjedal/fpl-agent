@@ -26,9 +26,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="mx-auto max-w-6xl px-4 py-4">
               <div className="flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2 text-xl font-extrabold tracking-tight">
-                  <span className="grid h-8 w-8 place-items-center rounded-lg bg-fpl-green text-fpl-purple">
-                    ⚽
-                  </span>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/logo.png"
+                    alt="FPL Agent"
+                    className="h-9 w-9 rounded-full object-cover ring-2 ring-fpl-green"
+                  />
                   FPL <span className="text-fpl-green">Agent</span>
                 </Link>
                 <span className="hidden text-xs font-medium text-white/60 sm:block">
